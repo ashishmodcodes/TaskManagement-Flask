@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+import os
 
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -8,11 +9,11 @@ app = Flask(__name__)
 #DB connection
 
 db_config ={
-  'host': 'localhost',
-  'user': 'root',
-  'password': 'pavbhaji77',
-  'database': 'user_db',
-  'port': 3306
+  'host': os.getenv("DB_HOST", "localhost"),
+  'user': os.getenv("DB_USER", "root"),
+  'password': os.getenv("DB_PASSWORD"),
+  'database': os.getenv("DB_NAME", "user_db"),
+  'port': int(os.getenv("DB_PORT", 3306))
 
 }
 
